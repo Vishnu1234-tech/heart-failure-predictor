@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Heart Failure Predictor</title>
+    <!-- ✅ Correct CSS Link -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>💓 Heart Failure Predictor</h2>
+        
+        <form action="/predict" method="post">
+            {% for field in ['age', 'anaemia', 'creatinine_phosphokinase', 'diabetes',
+                             'ejection_fraction', 'high_blood_pressure', 'platelets',
+                             'serum_creatinine', 'serum_sodium', 'sex', 'smoking', 'time'] %}
+                <input type="text" name="{{ field }}" placeholder="{{ field.replace('_', ' ').title() }}" required><br>
+            {% endfor %}
+            <input type="submit" value="Predict">
+        </form>
+
+        {% if prediction_text %}
+            <h3>Prediction: {{ prediction_text }}</h3>
+        {% endif %}
+    </div>
+</body>
+</html>
